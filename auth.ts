@@ -27,10 +27,12 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         const password = creds?.password as string | undefined;
         if (!email || !password) throw credentialsError("missing-credentials");
 
-        const existingUser = (await User.findOne({ email })) as UserType;
+        const existingUser = (await User.findOne({ email }).select(
+          "+password",
+        )) as UserType;
         if (!existingUser) throw credentialsError("invalid-credentials");
 
-        const ok = await bcrypt.compare(existingUser.password, password);
+        const ok = await bcrypt.compare(password, existingUser.password);
         if (!ok) throw credentialsError("invalid-credentials");
 
         return {

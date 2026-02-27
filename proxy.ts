@@ -4,7 +4,7 @@ import type { NextAuthRequest } from "next-auth";
 
 export default auth((req: NextAuthRequest) => {
   if (!req.auth) {
-    return NextResponse.redirect(new URL("/api/auth/signin", req.url));
+    return NextResponse.redirect(new URL("/login", req.url));
   }
 });
 
