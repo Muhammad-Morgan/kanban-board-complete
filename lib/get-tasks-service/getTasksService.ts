@@ -7,9 +7,12 @@ type GetTasksProps = {
   q?: string;
 };
 
-export async function getTasks({ q = "" }: GetTasksProps) {
-  console.log(q);
-
+export async function getTasks({ q = "" }: GetTasksProps): Promise<{
+  success: boolean;
+  tasks: TaskType[];
+  count: number;
+  statusCode: StatusCodes;
+}> {
   const filter = q
     ? {
         $or: [
@@ -20,7 +23,6 @@ export async function getTasks({ q = "" }: GetTasksProps) {
     : {};
 
   const tasks = (await Task.find(filter)) as TaskType[];
-  console.log(tasks);
 
   return {
     success: true,
@@ -30,7 +32,7 @@ export async function getTasks({ q = "" }: GetTasksProps) {
   };
 }
 
-export async function getSingleTask({ id }: { id: string }) {
+export async function getSingleTask({ id }: { id: string }): Promise<unknown> {
   if (!id)
     return { message: "ID is missing", statusCode: StatusCodes.BAD_REQUEST };
   await dbConnect();

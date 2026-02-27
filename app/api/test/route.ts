@@ -1,18 +1,11 @@
+import { createTask } from "@/lib/create-task-service/createTaskService";
 import { BadRequestError, NotFoundError } from "@/lib/errors";
-import {
-  getSingleTask,
-  getTasks,
-} from "@/lib/get-tasks-service/getTasksService";
 import { NextResponse } from "next/server";
 
-export async function GET(req: Request) {
-  const { searchParams } = new URL(req.url);
-  const q = searchParams.get("q")!;
-  const { tasks, count } = await getTasks({ q });
-  if (tasks.length === 0)
-    throw new NotFoundError("No Tasks are found in route handler...");
-  return NextResponse.json({ msg: "test", tasks, count });
-}
-// export const POST = async () => {};
-// export const POST = async ()=>{}
-// export const POST = async ()=>{}
+export const POST = async (req: Request) => {
+  const { title, description, column } = await req.json();
+
+  const resp = await createTask({ title, description, column });
+  if (!resp.success) return NextResponse.json({ msg: resp.message });
+  return NextResponse.json({ sucess: resp.success });
+};
