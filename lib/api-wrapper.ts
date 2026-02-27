@@ -5,10 +5,10 @@
 import { NextResponse } from "next/server";
 import { StatusCodes } from "http-status-codes";
 export const apiWrapper =
-  (handler: (...args: unknown[]) => Promise<unknown>) =>
-  async (...args: unknown[]) => {
+  (handler: (req: Request) => Promise<NextResponse<unknown>>) =>
+  async (req: Request) => {
     try {
-      return await handler(...args);
+      return await handler(req);
     } catch (error: unknown) {
       // here I will execute the middleware logic from express:
       // 1. initialize safe defaults
