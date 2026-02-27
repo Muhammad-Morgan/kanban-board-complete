@@ -6,7 +6,29 @@ import { TaskType } from "@/models/Task/task";
 type GetTasksProps = {
   q?: string;
 };
-export async function getTasks({ q = "" }: GetTasksProps) {}
+
+export async function getTasks({ q = "" }: GetTasksProps) {
+  console.log(q);
+
+  const filter = q
+    ? {
+        $or: [
+          { title: { $regex: q, $options: "i" } },
+          { description: { $regex: q, $options: "i" } },
+        ],
+      }
+    : {};
+
+  const tasks = (await Task.find(filter)) as TaskType[];
+  console.log(tasks);
+
+  return {
+    success: true,
+    tasks,
+    count: tasks.length,
+    statusCode: StatusCodes.OK,
+  };
+}
 
 export async function getSingleTask({ id }: { id: string }) {
   if (!id)
