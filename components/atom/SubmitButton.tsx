@@ -1,4 +1,5 @@
 import { Button } from "./button";
+import { Spinner } from "./spinner";
 
 interface SubmitButtonProps {
   isLoading?: boolean;
@@ -13,16 +14,11 @@ export const SubmitButton = ({
     <Button
       type="submit"
       disabled={isLoading}
-      className="btn btn-primary"
-      style={{ opacity: isLoading ? 0.7 : 1 }}
+      className={isLoading ? "opacity-70" : undefined}
     >
       {isLoading ? (
         <>
-          <span
-            className="spinner-border spinner-border-sm me-2"
-            role="status"
-            aria-hidden="true"
-          />
+          <Spinner className="size-4" />
           Processing...
         </>
       ) : (

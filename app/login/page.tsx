@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ShieldCheck, Sparkles, Timer } from "lucide-react";
+import { LayoutGrid, Sparkles, Timer, Users } from "lucide-react";
 import { Fraunces } from "next/font/google";
 import LoginPage from "@/components/page/LoginPage";
 import { cn } from "@/lib/utils";
@@ -26,11 +26,11 @@ export default async function Login() {
             className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.35em] text-muted-foreground hover:text-foreground"
           >
             <span className="h-2 w-2 rounded-full bg-primary" />
-            Quiz Flow
+            Kanban Board
           </Link>
           <div className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-background/70 px-4 py-1 text-[10px] uppercase tracking-[0.3em] text-muted-foreground shadow-sm backdrop-blur">
             <Sparkles className="h-3.5 w-3.5" />
-            Secure sign-in
+            Team-ready access
           </div>
           <h1
             className={cn(
@@ -38,25 +38,31 @@ export default async function Login() {
               "text-4xl font-semibold text-foreground md:text-5xl",
             )}
           >
-            Welcome back to your quiz workspace.
+            Welcome back to your kanban workspace.
           </h1>
           <p className="text-lg text-muted-foreground">
-            Log in to continue building assessments or taking your next quiz
-            session.
+            Log in to plan tasks, track progress, and keep work moving across
+            your boards.
           </p>
           <div className="grid gap-4 sm:grid-cols-2">
             {[
               {
-                title: "Secure sessions",
+                title: "Board clarity",
                 description:
-                  "Keep attempts protected with stable sessions and timed access.",
-                icon: ShieldCheck,
+                  "See every task, status, and owner in one shared view.",
+                icon: LayoutGrid,
               },
               {
-                title: "Guided pacing",
+                title: "Sprint focus",
                 description:
-                  "Timers, autosave, and progress cues keep learners on track.",
+                  "Prioritize what matters and keep delivery on schedule.",
                 icon: Timer,
+              },
+              {
+                title: "Team sync",
+                description:
+                  "Stay aligned with updates, comments, and activity history.",
+                icon: Users,
               },
             ].map((item) => {
               const Icon = item.icon;
@@ -83,7 +89,8 @@ export default async function Login() {
           <div className="relative">
             <div className="absolute -inset-6 rounded-[28px] bg-linear-to-br from-primary/30 via-accent/25 to-secondary/30 opacity-70 blur-2xl" />
             <LoginPage
-              title="Sign in to Quiz Flow"
+              title="Sign in to Kanban Board"
+              description="Access your boards, tasks, and team updates in one place."
               switchCta="New here?"
               switchLabel="Create account"
               switchHref="/register"

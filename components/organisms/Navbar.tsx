@@ -24,48 +24,43 @@ const Navbar = () => {
       : 0;
 
   return (
-    <nav className="navbar bg-body-tertiary border-bottom">
-      <div className="container d-flex flex-column py-2">
-        <div className="d-flex flex-column flex-md-row align-items-start align-items-md-center w-100 gap-3">
+    <nav className="border-b border-border/70 bg-background/80 backdrop-blur">
+      <div className="mx-auto flex w-full max-w-6xl flex-col gap-3 px-6 py-3">
+        <div className="flex flex-col gap-3 md:flex-row md:items-center">
           <Link
-            className="navbar-brand d-flex align-items-center gap-3 mb-0 text-decoration-none"
+            className="flex items-center gap-3 text-foreground no-underline"
             href="/"
           >
             <span
-              className="icon-link justify-content-center rounded-3 bg-primary text-white shadow-sm"
-              style={{ width: "38px", height: "38px" }}
+              className="grid size-[38px] place-items-center rounded-lg bg-primary text-primary-foreground shadow-sm"
               aria-hidden="true"
             >
-              <LayoutGrid className="bi fs-3" />
+              <LayoutGrid className="h-5 w-5" />
             </span>
-            <span className="d-flex flex-column lh-sm">
-              <span className="text-uppercase fs-5 fw-semibold">
+            <span className="flex flex-col leading-tight">
+              <span className="text-sm font-semibold uppercase tracking-[0.25em] md:text-base">
                 Kanban Board
               </span>
-              <span className="text-body-secondary fs-6">
+              <span className="text-xs text-muted-foreground md:text-sm">
                 {tasksCount} tasks
               </span>
             </span>
           </Link>
 
-          <div className="d-flex flex-column flex-sm-row align-items-start align-items-sm-center gap-2 ms-md-auto">
+          <div className="flex w-full flex-col gap-2 sm:flex-row sm:items-center md:ml-auto md:w-auto">
             <Suspense
               fallback={
-                <div
-                  className="w-100"
-                  style={{ maxWidth: "220px", height: "31px" }}
-                />
+                <div className="h-8 w-full max-w-full sm:max-w-[240px]" />
               }
             >
               <SearchBar />
             </Suspense>
-            <div className="d-flex align-items-center gap-2">
+            <div className="flex items-center gap-2">
               <ModeToggle />
               {/* Logout button placeholder */}
               <span
                 aria-hidden="true"
-                className="d-inline-block"
-                style={{ width: "36px", height: "36px" }}
+                className="inline-block size-9"
               />
             </div>
           </div>

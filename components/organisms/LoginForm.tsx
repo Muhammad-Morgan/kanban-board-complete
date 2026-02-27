@@ -6,7 +6,6 @@ import { toast } from "sonner";
 import { FieldDescription } from "@/components/atom/field";
 import { Form } from "@/components/atom/form";
 import { CustomFormField } from "@/components/molecule/FormComponents";
-import Link from "next/link";
 import { Button } from "../atom/button";
 import { Spinner } from "@/components/atom/spinner";
 import { loginSchema, LoginSchemaType } from "@/lib/zodSchemas";
@@ -56,26 +55,19 @@ const LoginForm = () => {
           name="password"
           control={form.control}
         />
-        <div className="space-y-2">
-          <div className="flex flex-col justify-center">
-            <Link
-              href="/forgotpassword"
-              className="w-fit text-xs text-muted-foreground hover:text-foreground"
-            >
-              Forgot your password?
-            </Link>
-            <Button className="mt-2 w-2/5" type="submit" disabled={isPending}>
-              {isPending ? (
-                <>
-                  <Spinner className="h-4 w-4" />
-                  Logging in...
-                </>
-              ) : (
-                "Log In"
-              )}
-            </Button>
-          </div>
-        </div>
+        <FieldDescription className="-mt-4 ml-1">
+          Passwords are encrypted using 1-way tool.
+        </FieldDescription>
+        <Button className="w-full" type="submit" disabled={isPending}>
+          {isPending ? (
+            <>
+              <Spinner className="h-4 w-4" />
+              Logging in...
+            </>
+          ) : (
+            "Log In"
+          )}
+        </Button>
       </form>
     </Form>
   );

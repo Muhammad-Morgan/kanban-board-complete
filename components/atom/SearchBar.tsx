@@ -30,18 +30,18 @@ const SearchBar = () => {
   }, [currentSearchValue]);
 
   return (
-    <div className="position-relative w-100" style={{ maxWidth: "220px" }}>
-      <Label className="visually-hidden" htmlFor="q">
+    <div className="relative w-full max-w-full sm:max-w-[240px]">
+      <Label className="sr-only" htmlFor="q">
         Search
       </Label>
       <Search
-        className="position-absolute top-50 start-0 translate-middle-y ms-3 text-body-tertiary"
+        className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground"
         size={14}
         aria-hidden="true"
       />
       <Input
         id="q"
-        className="form-control form-control-sm ps-5 rounded-3"
+        className="h-8 pl-9 text-sm"
         type="search"
         name="q"
         placeholder={"search tasks..."}

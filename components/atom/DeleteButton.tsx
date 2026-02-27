@@ -32,7 +32,8 @@ const DeleteButton = ({ taskId }: DeleteButtonProps) => {
 
   return (
     <Button
-      className="btn btn-outline-danger btn-sm"
+      variant="destructive"
+      size="sm"
       type="button"
       onClick={() => mutate()}
       disabled={isPending}

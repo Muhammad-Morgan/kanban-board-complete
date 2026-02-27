@@ -82,7 +82,7 @@ const RegisterForm = () => {
           name="name"
           type="text"
           control={form.control}
-          className=" w-full"
+          className="w-full"
         />
         <CustomFormField name="email" type="email" control={form.control} />
         <CustomFormField
@@ -90,25 +90,23 @@ const RegisterForm = () => {
           type="password"
           control={form.control}
         />
-        <section className="flex justify-between">
-          <div className="flex gap-x-3">
-            <Button
-              className="my-3 px-6 w-full"
-              type="submit"
-              disabled={isPending}
-            >
-              {isPending ? (
-                <>
-                  <Spinner className="h-4 w-4" />
-                  Registering...
-                </>
-              ) : (
-                "Register"
-              )}
-            </Button>
-          </div>
+        <section className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <Button
+            className="w-full sm:w-auto"
+            type="submit"
+            disabled={isPending}
+          >
+            {isPending ? (
+              <>
+                <Spinner className="h-4 w-4" />
+                Registering...
+              </>
+            ) : (
+              "Register"
+            )}
+          </Button>
           <div className="flex items-center gap-2 text-sm text-muted-foreground">
-            Already a member ?
+            Already a member?
             <Button asChild variant="link" className="px-1">
               <Link href="/login">Login</Link>
             </Button>
