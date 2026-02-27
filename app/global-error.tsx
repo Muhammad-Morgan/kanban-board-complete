@@ -1,7 +1,7 @@
 // last-resort fallback (layout-level / uncaught)
 "use client";
 
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/atom/button";
 
 export default function GlobalError({
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

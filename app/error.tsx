@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/atom/button";
 
 // for runtime errors
 export default function Error({
