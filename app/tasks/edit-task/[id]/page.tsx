@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
-import { getSingleTask } from "@/lib/actions";
+
 import EditTaskForm from "@/components/organisms/EditTaskForm";
+import { getSingleTask } from "@/lib/get-tasks-service/getTasksService";
 
 type EditTaskPageProps = {
   params: { id: string };
@@ -8,13 +9,11 @@ type EditTaskPageProps = {
 
 export default async function EditTaskPage({ params }: EditTaskPageProps) {
   const { id } = await params;
-  if (!id) throw new Error("ID missing...");
-  const task = await getSingleTask(id);
-
-  if (!task) {
+  const resp = await getSingleTask({ id });
+  if (!resp.success) {
     notFound();
   }
-
+  const { task } = resp;
   return (
     <div
       className="d-flex justify-content-center"

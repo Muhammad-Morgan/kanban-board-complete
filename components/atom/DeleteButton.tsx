@@ -2,6 +2,8 @@
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Button } from "./button";
+import { deleteTask } from "@/lib/delete-task-service/deleteTaskService";
+import { toast } from "sonner";
 
 type DeleteButtonProps = {
   taskId: string;
@@ -13,20 +15,22 @@ const DeleteButton = ({ taskId }: DeleteButtonProps) => {
   const { mutate, isPending } = useMutation({
     mutationKey: ["tasks", "delete", taskId],
     mutationFn: async () => {
-      const resp = await fetch("/api/tasks/deletetask", {
-        method: "DELETE",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ id: taskId }),
-      });
+      const resp = await deleteTask({ id: taskId });
 
-      if (!resp.ok) {
-        throw new Error("Failed to delete task");
+      if (!resp.success) {
+        toast.error(
+          resp.message || `Deleting task ID ${taskId} was unsuccessful...`,
+        );
+        return;
       }
 
-      return resp.json();
+      return resp;
     },
     onSuccess: () => {
+      toast.success(`Task ID ${taskId} was deleted...`);
       queryClient.invalidateQueries({ queryKey: ["tasks"] });
+      queryClient.invalidateQueries({ queryKey: ["delete"] });
+      queryClient.invalidateQueries({ queryKey: [taskId] });
     },
   });
 

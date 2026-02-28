@@ -4,6 +4,8 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { taskSchema, type TaskSchemaType } from "@/lib/zodSchemas";
 import { SubmitButton } from "../atom/SubmitButton";
+import { createTask } from "@/lib/create-task-service/createTaskService";
+import { toast } from "sonner";
 
 const CreateTask = () => {
   const queryClient = useQueryClient();
@@ -24,22 +26,20 @@ const CreateTask = () => {
   const { mutate, isPending } = useMutation({
     mutationKey: ["tasks"],
     mutationFn: async (data: TaskSchemaType) => {
-      // http req to /api/lessons
-      const resp = await fetch("/api/tasks/createtask", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+      const resp = await createTask({
+        title: data.title,
+        description: data.description,
+        column: data.column,
       });
-      return resp.json();
+      if (!resp.success) {
+        toast.error(resp.message || "Task wasn't created...");
+      }
+      return resp;
     },
-    onSuccess: (data) => {
-      console.log(data);
+    onSuccess: () => {
+      toast.success("Task was created...");
       queryClient.invalidateQueries({ queryKey: ["tasks"] });
       reset();
-    },
-    onError: (err: { message: string; status: number }) => {
-      if (err.status === 400) return console.log(err.message);
-      console.log(err.message);
     },
   });
   const onSubmit = (data: TaskSchemaType) => {

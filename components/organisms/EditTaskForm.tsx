@@ -2,6 +2,8 @@
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import type { Task } from "@/lib/zodSchemas";
+import { editTask } from "@/lib/edit-task-service/editTaskService";
+import { toast } from "sonner";
 
 type TaskWithId = Task & { id: string | number };
 
@@ -15,23 +17,23 @@ const EditTaskForm = ({ task }: EditTaskFormProps) => {
   const { mutate, isPending } = useMutation({
     mutationKey: ["tasks", "edit", task.id],
     mutationFn: async (payload: {
-      id: string | number;
+      id: string;
       title: string;
       description: string;
-      column: string;
+      column: "backlog" | "in-progress" | "review" | "done";
     }) => {
-      const resp = await fetch("/api/tasks/edittask", {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-      if (!resp.ok) {
-        throw new Error("Failed to update task");
+      const resp = await editTask(payload);
+      if (!resp.success) {
+        toast.error(resp.message);
+        return;
       }
-      return resp.json();
+      return resp;
     },
     onSuccess: () => {
+      toast.success(`Task ID ${task.id} was modified`);
       queryClient.invalidateQueries({ queryKey: ["tasks"] });
+      queryClient.invalidateQueries({ queryKey: ["edit"] });
+      queryClient.invalidateQueries({ queryKey: [task.id] });
     },
   });
 
@@ -42,7 +44,11 @@ const EditTaskForm = ({ task }: EditTaskFormProps) => {
       id: task.id,
       title: String(formData.get("title") ?? ""),
       description: String(formData.get("description") ?? ""),
-      column: String(formData.get("column") ?? "backlog"),
+      column: String(formData.get("column") ?? "backlog") as
+        | "backlog"
+        | "in-progress"
+        | "review"
+        | "done",
     });
   };
 

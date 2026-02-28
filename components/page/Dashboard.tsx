@@ -2,7 +2,6 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import type { Task } from "@/lib/zodSchemas";
 import TasksList from "@/components/organisms/TasksList";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
@@ -20,7 +19,8 @@ import {
   useSortable,
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-
+import { getTasks } from "@/lib/get-tasks-service/getTasksService";
+import { TaskType } from "@/models/Task/task";
 const columns = [
   {
     key: "backlog",
@@ -50,11 +50,11 @@ const Dashboard = () => {
   const searchParams = useSearchParams();
   const q = searchParams.get("q") || "";
 
-  const { data, isPending } = useQuery({
+  const { data } = useQuery({
     queryKey: ["tasks", q],
     queryFn: async () => {
-      const resp = await fetch(`/api/tasks/gettasks?q=${q}`);
-      return resp.json();
+      const resp = getTasks({ q });
+      return resp;
     },
   });
 
@@ -97,10 +97,10 @@ const Dashboard = () => {
       return arrayMove(items, oldIndex, newIndex);
     });
   };
-  const rawTasks = (data?.tasks as Task[]) ?? [];
+  const rawTasks = (data?.tasks as TaskType[]) ?? [];
   const currentTasks = rawTasks.map((task) => ({
     ...task,
-    id: String((task as Task & { id?: string | number })?.id),
+    id: String((task as TaskType & { id?: string | number })?.id),
     column: task.column,
   }));
   const getColumnCount = (columnKey: string) => {
@@ -128,7 +128,7 @@ const Dashboard = () => {
     return (
       <div ref={setNodeRef} style={style} className="col-12 col-md-6 col-xl-3">
         <div
-          className="h-100 border border-1 rounded-3 p-3 d-flex flex-column gap-3"
+          className="h-100  border rounded-3 p-3 d-flex flex-column gap-3"
           style={{
             borderColor: column.color,
             backgroundColor: "var(--bs-column-bg)",
@@ -171,7 +171,7 @@ const Dashboard = () => {
     return (
       <div className="col-12 col-md-6 col-xl-3">
         <div
-          className="h-100 border border-1 rounded-3 p-3 d-flex flex-column gap-3"
+          className="h-100 borderrounded-3 p-3 d-flex flex-column gap-3"
           style={{
             borderColor: column.color,
             backgroundColor: "var(--bs-column-bg)",
