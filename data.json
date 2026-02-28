@@ -1,0 +1,367 @@
+[
+  {
+    "title": "Improve responsive layout",
+    "description": "Ensure columns stack properly on mobile",
+    "column": "done",
+    "createdBy": "69a2516ed0f72287caf1386f"
+  },
+  {
+    "title": "Fix login validation",
+    "description": "Handle invalid credentials properly",
+    "column": "review",
+    "createdBy": "69a2516ed0f72287caf1386f"
+  },
+  {
+    "title": "Add loading spinner",
+    "description": "Show spinner while fetching tasks",
+    "column": "in-progress",
+    "createdBy": "69a2516ed0f72287caf1386f"
+  },
+  {
+    "title": "Refactor API handler",
+    "description": "Clean up register route logic",
+    "column": "backlog",
+    "createdBy": "69a2516ed0f72287caf1386f"
+  },
+  {
+    "title": "Optimize Mongo query",
+    "description": "Add indexes for search fields",
+    "column": "done",
+    "createdBy": "69a2516ed0f72287caf1386f"
+  },
+  {
+    "title": "Implement pagination",
+    "description": "Paginate tasks list on dashboard",
+    "column": "review",
+    "createdBy": "69a2516ed0f72287caf1386f"
+  },
+  {
+    "title": "Fix toast notifications",
+    "description": "Prevent duplicate success messages",
+    "column": "in-progress",
+    "createdBy": "69a2516ed0f72287caf1386f"
+  },
+  {
+    "title": "Add task search",
+    "description": "Filter tasks by title or description",
+    "column": "backlog",
+    "createdBy": "69a2516ed0f72287caf1386f"
+  },
+  {
+    "title": "Improve form UX",
+    "description": "Add inline validation messages",
+    "column": "done",
+    "createdBy": "69a2516ed0f72287caf1386f"
+  },
+  {
+    "title": "Secure API routes",
+    "description": "Protect endpoints with middleware",
+    "column": "review",
+    "createdBy": "69a2516ed0f72287caf1386f"
+  },
+
+  {
+    "title": "Add dark mode",
+    "description": "Toggle theme using context",
+    "column": "in-progress",
+    "createdBy": "69a2516ed0f72287caf1386f"
+  },
+  {
+    "title": "Improve drag and drop",
+    "description": "Fix column reorder issue",
+    "column": "backlog",
+    "createdBy": "69a2516ed0f72287caf1386f"
+  },
+  {
+    "title": "Add unit tests",
+    "description": "Cover task creation logic",
+    "column": "done",
+    "createdBy": "69a2516ed0f72287caf1386f"
+  },
+  {
+    "title": "Fix column header style",
+    "description": "Align labels properly",
+    "column": "review",
+    "createdBy": "69a2516ed0f72287caf1386f"
+  },
+  {
+    "title": "Implement debounce search",
+    "description": "Prevent excessive API calls",
+    "column": "in-progress",
+    "createdBy": "69a2516ed0f72287caf1386f"
+  },
+  {
+    "title": "Improve error handling",
+    "description": "Standardize API error responses",
+    "column": "backlog",
+    "createdBy": "69a2516ed0f72287caf1386f"
+  },
+  {
+    "title": "Refactor components",
+    "description": "Split large task component",
+    "column": "done",
+    "createdBy": "69a2516ed0f72287caf1386f"
+  },
+  {
+    "title": "Add confirmation modal",
+    "description": "Confirm before deleting tasks",
+    "column": "review",
+    "createdBy": "69a2516ed0f72287caf1386f"
+  },
+  {
+    "title": "Fix mobile navbar",
+    "description": "Resolve overflow issue",
+    "column": "in-progress",
+    "createdBy": "69a2516ed0f72287caf1386f"
+  },
+  {
+    "title": "Optimize bundle size",
+    "description": "Remove unused dependencies",
+    "column": "backlog",
+    "createdBy": "69a2516ed0f72287caf1386f"
+  },
+
+  {
+    "title": "Improve accessibility",
+    "description": "Add aria-labels to buttons",
+    "column": "done",
+    "createdBy": "69a2516ed0f72287caf1386f"
+  },
+  {
+    "title": "Fix session timeout",
+    "description": "Handle expired JWT properly",
+    "column": "review",
+    "createdBy": "69a2516ed0f72287caf1386f"
+  },
+  {
+    "title": "Add activity logs",
+    "description": "Track user actions",
+    "column": "in-progress",
+    "createdBy": "69a2516ed0f72287caf1386f"
+  },
+  {
+    "title": "Improve performance",
+    "description": "Memoize heavy components",
+    "column": "backlog",
+    "createdBy": "69a2516ed0f72287caf1386f"
+  },
+  {
+    "title": "Refactor schema validation",
+    "description": "Extract common zod logic",
+    "column": "done",
+    "createdBy": "69a2516ed0f72287caf1386f"
+  },
+  {
+    "title": "Fix redirect logic",
+    "description": "Handle unauthorized access",
+    "column": "review",
+    "createdBy": "69a2516ed0f72287caf1386f"
+  },
+  {
+    "title": "Add sorting feature",
+    "description": "Sort tasks by date",
+    "column": "in-progress",
+    "createdBy": "69a2516ed0f72287caf1386f"
+  },
+  {
+    "title": "Improve code comments",
+    "description": "Document complex logic",
+    "column": "backlog",
+    "createdBy": "69a2516ed0f72287caf1386f"
+  },
+  {
+    "title": "Fix drag animation",
+    "description": "Smooth transition between columns",
+    "column": "done",
+    "createdBy": "69a2516ed0f72287caf1386f"
+  },
+  {
+    "title": "Add export feature",
+    "description": "Export tasks as CSV",
+    "column": "review",
+    "createdBy": "69a2516ed0f72287caf1386f"
+  },
+
+  {
+    "title": "Create analytics dashboard",
+    "description": "Display task statistics",
+    "column": "done",
+    "createdBy": "69a251c5d0f72287caf13879"
+  },
+  {
+    "title": "Fix column overflow",
+    "description": "Prevent horizontal scroll",
+    "column": "review",
+    "createdBy": "69a251c5d0f72287caf13879"
+  },
+  {
+    "title": "Add notification system",
+    "description": "Notify on task updates",
+    "column": "in-progress",
+    "createdBy": "69a251c5d0f72287caf13879"
+  },
+  {
+    "title": "Refactor auth flow",
+    "description": "Improve credential handling",
+    "column": "backlog",
+    "createdBy": "69a251c5d0f72287caf13879"
+  },
+  {
+    "title": "Optimize server actions",
+    "description": "Reduce unnecessary re-renders",
+    "column": "done",
+    "createdBy": "69a251c5d0f72287caf13879"
+  },
+  {
+    "title": "Fix pagination bug",
+    "description": "Correct page count logic",
+    "column": "review",
+    "createdBy": "69a251c5d0f72287caf13879"
+  },
+  {
+    "title": "Add avatar upload",
+    "description": "Allow profile image upload",
+    "column": "in-progress",
+    "createdBy": "69a251c5d0f72287caf13879"
+  },
+  {
+    "title": "Improve sidebar UX",
+    "description": "Make sidebar collapsible",
+    "column": "backlog",
+    "createdBy": "69a251c5d0f72287caf13879"
+  },
+  {
+    "title": "Add role-based access",
+    "description": "Restrict admin features",
+    "column": "done",
+    "createdBy": "69a251c5d0f72287caf13879"
+  },
+  {
+    "title": "Fix search highlight",
+    "description": "Highlight matched keywords",
+    "column": "review",
+    "createdBy": "69a251c5d0f72287caf13879"
+  },
+
+  {
+    "title": "Improve API logging",
+    "description": "Log request duration",
+    "column": "in-progress",
+    "createdBy": "69a251c5d0f72287caf13879"
+  },
+  {
+    "title": "Add retry logic",
+    "description": "Retry failed requests",
+    "column": "backlog",
+    "createdBy": "69a251c5d0f72287caf13879"
+  },
+  {
+    "title": "Fix drag drop collision",
+    "description": "Resolve drop area detection",
+    "column": "done",
+    "createdBy": "69a251c5d0f72287caf13879"
+  },
+  {
+    "title": "Refactor state management",
+    "description": "Simplify global store",
+    "column": "review",
+    "createdBy": "69a251c5d0f72287caf13879"
+  },
+  {
+    "title": "Add bulk actions",
+    "description": "Delete multiple tasks",
+    "column": "in-progress",
+    "createdBy": "69a251c5d0f72287caf13879"
+  },
+  {
+    "title": "Improve CI pipeline",
+    "description": "Add lint checks",
+    "column": "backlog",
+    "createdBy": "69a251c5d0f72287caf13879"
+  },
+  {
+    "title": "Fix modal backdrop",
+    "description": "Prevent scroll behind modal",
+    "column": "done",
+    "createdBy": "69a251c5d0f72287caf13879"
+  },
+  {
+    "title": "Add keyboard shortcuts",
+    "description": "Improve power-user experience",
+    "column": "review",
+    "createdBy": "69a251c5d0f72287caf13879"
+  },
+  {
+    "title": "Improve caching strategy",
+    "description": "Reduce redundant fetches",
+    "column": "in-progress",
+    "createdBy": "69a251c5d0f72287caf13879"
+  },
+  {
+    "title": "Fix form reset bug",
+    "description": "Clear fields after submit",
+    "column": "backlog",
+    "createdBy": "69a251c5d0f72287caf13879"
+  },
+
+  {
+    "title": "Add audit trail",
+    "description": "Track changes history",
+    "column": "done",
+    "createdBy": "69a251c5d0f72287caf13879"
+  },
+  {
+    "title": "Improve toast styling",
+    "description": "Standardize notification theme",
+    "column": "review",
+    "createdBy": "69a251c5d0f72287caf13879"
+  },
+  {
+    "title": "Fix auth middleware",
+    "description": "Handle protected routes properly",
+    "column": "in-progress",
+    "createdBy": "69a251c5d0f72287caf13879"
+  },
+  {
+    "title": "Add offline support",
+    "description": "Cache tasks locally",
+    "column": "backlog",
+    "createdBy": "69a251c5d0f72287caf13879"
+  },
+  {
+    "title": "Improve SEO metadata",
+    "description": "Add proper meta tags",
+    "column": "done",
+    "createdBy": "69a251c5d0f72287caf13879"
+  },
+  {
+    "title": "Fix hydration warning",
+    "description": "Resolve mismatch between server and client",
+    "column": "review",
+    "createdBy": "69a251c5d0f72287caf13879"
+  },
+  {
+    "title": "Add API rate limiting",
+    "description": "Prevent abuse",
+    "column": "in-progress",
+    "createdBy": "69a251c5d0f72287caf13879"
+  },
+  {
+    "title": "Improve file uploads",
+    "description": "Handle large files safely",
+    "column": "backlog",
+    "createdBy": "69a251c5d0f72287caf13879"
+  },
+  {
+    "title": "Refactor task model",
+    "description": "Simplify schema relations",
+    "column": "done",
+    "createdBy": "69a251c5d0f72287caf13879"
+  },
+  {
+    "title": "Add onboarding guide",
+    "description": "Help new users navigate app",
+    "column": "review",
+    "createdBy": "69a251c5d0f72287caf13879"
+  }
+]
