@@ -7,11 +7,12 @@ import Dashboard from "@/components/page/Dashboard";
 import { getTasks } from "@/lib/get-tasks-service/getTasksService";
 
 type TasksPageProps = {
-  params?: { q?: string };
+  searchParams?: Promise<{ q?: string }>;
 };
 
-export default async function TasksPage({ params }: TasksPageProps) {
-  const q = (await params?.q) ?? "";
+export default async function TasksPage({ searchParams }: TasksPageProps) {
+  const resolvedSearchParams = (await searchParams) ?? {};
+  const q = resolvedSearchParams.q ?? "";
   const queryClient = new QueryClient();
 
   await queryClient.prefetchQuery({

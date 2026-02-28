@@ -25,22 +25,22 @@ const columns = [
   {
     key: "backlog",
     title: "Backlog",
-    color: "var(--bs-primary)",
+    color: "var(--chart-1)",
   },
   {
     key: "in-progress",
     title: "In Progress",
-    color: "var(--bs-warning)",
+    color: "var(--chart-4)",
   },
   {
     key: "review",
     title: "Review",
-    color: "var(--bs-purple)",
+    color: "var(--chart-3)",
   },
   {
     key: "done",
     title: "Done",
-    color: "var(--bs-success)",
+    color: "var(--chart-2)",
   },
 ] as const;
 
@@ -97,7 +97,7 @@ const Dashboard = () => {
       return arrayMove(items, oldIndex, newIndex);
     });
   };
-  const rawTasks = (data?.tasks as TaskType[]) ?? [];
+  const rawTasks = (data?.tasks as unknown as TaskType[]) ?? [];
   const currentTasks = rawTasks.map((task) => ({
     ...task,
     id: String((task as TaskType & { id?: string | number })?.id),
@@ -126,39 +126,28 @@ const Dashboard = () => {
     };
 
     return (
-      <div ref={setNodeRef} style={style} className="col-12 col-md-6 col-xl-3">
-        <div
-          className="h-100  border rounded-3 p-3 d-flex flex-column gap-3"
-          style={{
-            borderColor: column.color,
-            backgroundColor: "var(--bs-column-bg)",
-          }}
-        >
+      <div ref={setNodeRef} style={style} className="w-full">
+        <div className="flex h-full flex-col gap-3 rounded-2xl border bg-muted p-4 shadow-sm transition hover:shadow-md">
           <div
-            className="d-flex align-items-center justify-content-between"
-            style={{ cursor: "grab" }}
+            className="flex cursor-grab items-center justify-between gap-2 active:cursor-grabbing"
             {...attributes}
             {...listeners}
           >
-            <span className="d-flex align-items-center gap-2 text-uppercase small fw-semibold text-body">
+            <span className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
               <span
-                className="rounded-circle d-inline-block"
-                style={{
-                  width: "8px",
-                  height: "8px",
-                  backgroundColor: column.color,
-                }}
+                className="h-2 w-2 rounded-full"
+                style={{ backgroundColor: column.color }}
               />
               {column.title}
             </span>
-            <span className="badge rounded-pill text-bg-light text-body-secondary">
+            <span className="inline-flex items-center rounded-full border border-border/70 bg-background/70 px-2.5 py-0.5 text-[11px] font-medium text-muted-foreground">
               {getColumnCount(column.key)}
             </span>
           </div>
           <TasksList column={column.key} tasks={currentTasks} />
           <Link
-            href="/tasks/create-task"
-            className="btn btn-outline-primary btn-sm w-100"
+            href={`/tasks/create-task?column=${column.key}`}
+            className="inline-flex items-center justify-center rounded-lg border border-border/70 bg-background/60 px-3 py-2 text-sm font-medium text-foreground transition hover:border-primary/40 hover:bg-primary/5 hover:text-foreground"
           >
             + Add task
           </Link>
@@ -169,34 +158,27 @@ const Dashboard = () => {
 
   const StaticColumnCard = ({ column }: { column: ColumnConfig }) => {
     return (
-      <div className="col-12 col-md-6 col-xl-3">
+      <div className="w-full">
         <div
-          className="h-100 borderrounded-3 p-3 d-flex flex-column gap-3"
-          style={{
-            borderColor: column.color,
-            backgroundColor: "var(--bs-column-bg)",
-          }}
+          className="flex h-full flex-col gap-3 rounded-2xl border bg-card/80 p-4 shadow-sm"
+          style={{ borderColor: column.color }}
         >
-          <div className="d-flex align-items-center justify-content-between">
-            <span className="d-flex align-items-center gap-2 text-uppercase small fw-semibold text-body">
+          <div className="flex items-center justify-between gap-2">
+            <span className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
               <span
-                className="rounded-circle d-inline-block"
-                style={{
-                  width: "8px",
-                  height: "8px",
-                  backgroundColor: column.color,
-                }}
+                className="h-2 w-2 rounded-full"
+                style={{ backgroundColor: column.color }}
               />
               {column.title}
             </span>
-            <span className="badge rounded-pill text-bg-light text-body-secondary">
+            <span className="inline-flex items-center rounded-full border border-border/70 bg-background/70 px-2.5 py-0.5 text-[11px] font-medium text-muted-foreground">
               {getColumnCount(column.key)}
             </span>
           </div>
           <TasksList column={column.key} tasks={currentTasks} />
           <Link
-            href="/tasks/create-task"
-            className="btn btn-outline-primary btn-sm w-100"
+            href={`/tasks/create-task?column=${column.key}`}
+            className="inline-flex items-center justify-center rounded-lg border border-border/70 bg-background/60 px-3 py-2 text-sm font-medium text-foreground transition hover:border-primary/40 hover:bg-primary/5 hover:text-foreground"
           >
             + Add task
           </Link>
@@ -206,7 +188,7 @@ const Dashboard = () => {
   };
 
   const columnsGrid = (
-    <div className="row g-3">
+    <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
       {orderedColumns.map((column) =>
         isClient ? (
           <ColumnCard key={column.key} column={column} />
@@ -219,16 +201,16 @@ const Dashboard = () => {
 
   if (!isClient) {
     return (
-      <main className="container py-4">
-        <div className="d-flex flex-column gap-3">{columnsGrid}</div>
+      <main className="mx-auto w-full max-w-6xl px-6 py-6">
+        <div className="flex flex-col gap-4">{columnsGrid}</div>
       </main>
     );
   }
 
   return (
     <DndContext sensors={sensors} onDragEnd={handleDragEnd}>
-      <main className="container py-4">
-        <div className="d-flex flex-column gap-3">
+      <main className="mx-auto w-full max-w-6xl px-6 py-6">
+        <div className="flex flex-col gap-4">
           <SortableContext
             items={columnOrder}
             strategy={horizontalListSortingStrategy}

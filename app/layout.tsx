@@ -2,8 +2,6 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Provider } from "./provider";
-import Navbar from "@/components/organisms/Navbar";
-import { Header } from "@/components/molecule/Header";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -16,9 +14,21 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Kanban-style ToDo list",
+  title: "Kanban Workspace — Task & Project Management",
   description:
-    " ToDo list dashboard with 4 columns (e.g., Backlog, In Progress, Review, Done).",
+    "Professional kanban workspace to organize tasks, track progress, and keep teams aligned across backlog, in‑progress, review, and done.",
+  keywords: [
+    "kanban",
+    "task management",
+    "project management",
+    "workflow",
+    "productivity",
+    "agile",
+    "sprint planning",
+    "team collaboration",
+    "work tracking",
+    "dashboard",
+  ],
 };
 
 export default function RootLayout({
@@ -32,8 +42,6 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Provider>
-          <Navbar />
-          <Header />
           <main>{children}</main>
         </Provider>
       </body>

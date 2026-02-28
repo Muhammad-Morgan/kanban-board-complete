@@ -42,14 +42,13 @@ const TasksList = ({ column, tasks }: { column: Column; tasks: Task[] }) => {
   }, [hasMore, filteredTasks.length]);
 
   if (filteredTasks.length === 0) {
-    return <div className="small text-body-secondary">No tasks yet.</div>;
+    return <div className="text-sm text-muted-foreground">No tasks yet.</div>;
   }
 
   return (
     <div
       ref={containerRef}
-      className="d-flex flex-column gap-2 overflow-auto"
-      style={{ maxHeight: "520px" }}
+      className="flex max-h-130 flex-col gap-y-3 gap-x-2 overflow-auto pr-1"
     >
       {visibleTasks.map((task) => (
         <TaskCard key={task.id} task={task} />
@@ -57,7 +56,7 @@ const TasksList = ({ column, tasks }: { column: Column; tasks: Task[] }) => {
       {hasMore ? (
         <div
           ref={loadMoreRef}
-          className="py-2 text-center small text-body-secondary"
+          className="py-2 text-center text-xs text-muted-foreground"
         >
           Loading more...
         </div>

@@ -30,7 +30,7 @@ const SearchBar = () => {
   }, [currentSearchValue]);
 
   return (
-    <div className="relative w-full max-w-full sm:max-w-[240px]">
+    <div className="relative w-full max-w-full sm:max-w-60">
       <Label className="sr-only" htmlFor="q">
         Search
       </Label>
@@ -41,7 +41,7 @@ const SearchBar = () => {
       />
       <Input
         id="q"
-        className="h-8 pl-9 text-sm"
+        className="h-9 pl-9 text-sm bg-background"
         type="search"
         name="q"
         placeholder={"search tasks..."}

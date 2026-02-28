@@ -5,6 +5,7 @@ export interface TaskType extends mongoose.Document {
   title: string;
   description: string;
   column: "backlog" | "in-progress" | "review" | "done";
+  createdBy: string;
 }
 
 const taskSchema = new mongoose.Schema(
@@ -20,6 +21,10 @@ const taskSchema = new mongoose.Schema(
       type: String,
       enum: ["backlog", "in-progress", "review", "done"],
       default: "backlog",
+    },
+    createdBy: {
+      type: String,
+      required: [true, "This field is required..."],
     },
   },
   { timestamps: true },

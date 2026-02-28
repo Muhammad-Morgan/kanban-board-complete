@@ -15,13 +15,12 @@ export default async function EditTaskPage({ params }: EditTaskPageProps) {
   }
   const { task } = resp;
   return (
-    <div
-      className="d-flex justify-content-center"
-      style={{ paddingBlock: "2.5rem" }}
-    >
-      <div className="card" style={{ maxWidth: "500px", width: "100%" }}>
-        <div className="card-body">
-          <h5 className="card-title mb-4">Edit Task</h5>
+    <div className="flex justify-center px-6 py-10">
+      <div className="w-full max-w-[500px] rounded-2xl border border-border/70 bg-card/80 p-6 shadow-sm">
+        <div>
+          <h5 className="mb-4 text-lg font-semibold text-foreground">
+            Edit Task
+          </h5>
           <EditTaskForm task={task} />
         </div>
       </div>

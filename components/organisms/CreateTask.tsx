@@ -6,9 +6,15 @@ import { taskSchema, type TaskSchemaType } from "@/lib/zodSchemas";
 import { SubmitButton } from "../atom/SubmitButton";
 import { createTask } from "@/lib/create-task-service/createTaskService";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
-const CreateTask = () => {
+const CreateTask = ({
+  column: columnDefault,
+}: {
+  column?: "backlog" | "in-progress" | "review" | "done";
+}) => {
   const queryClient = useQueryClient();
+  const router = useRouter();
 
   const {
     reset,
@@ -20,7 +26,7 @@ const CreateTask = () => {
     defaultValues: {
       title: "",
       description: "",
-      column: "backlog",
+      column: columnDefault || "backlog",
     },
   });
   const { mutate, isPending } = useMutation({
@@ -40,6 +46,7 @@ const CreateTask = () => {
       toast.success("Task was created...");
       queryClient.invalidateQueries({ queryKey: ["tasks"] });
       reset();
+      router.push("/tasks");
     },
   });
   const onSubmit = (data: TaskSchemaType) => {
@@ -48,29 +55,31 @@ const CreateTask = () => {
   };
 
   return (
-    <div
-      className="d-flex justify-content-center"
-      style={{ paddingBlock: "2.5rem" }}
-    >
-      <div className="card" style={{ maxWidth: "500px", width: "100%" }}>
-        <div className="card-body">
-          <h5 className="card-title mb-4">Create New Task</h5>
+    <div className="flex justify-center px-6 py-10">
+      <div className="w-full max-w-125 rounded-2xl border border-border/70 bg-card/80 p-6 shadow-sm">
+        <div>
+          <h5 className="mb-4 text-lg font-semibold text-foreground">
+            Create New Task
+          </h5>
           <form
             onSubmit={handleSubmit(onSubmit)}
-            className="d-flex flex-column gap-4"
+            className="flex flex-col gap-5"
           >
             <div>
-              <label htmlFor="title" className="form-label fw-semibold mb-2">
+              <label
+                htmlFor="title"
+                className="mb-2 block text-sm font-semibold text-foreground"
+              >
                 Title
               </label>
               <input
                 id="title"
-                className={`form-control form-control-lg ${errors.title ? "is-invalid" : ""}`}
+                className={`w-full rounded-lg border bg-background px-3 py-2 text-sm text-foreground shadow-sm transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40 ${errors.title ? "border-destructive/70 focus-visible:ring-destructive/40" : "border-input"}`}
                 placeholder="e.g. Design homepage"
                 {...register("title")}
               />
               {errors.title ? (
-                <div className="invalid-feedback d-block mt-2">
+                <div className="mt-2 text-xs text-destructive">
                   {errors.title.message}
                 </div>
               ) : null}
@@ -79,32 +88,37 @@ const CreateTask = () => {
             <div>
               <label
                 htmlFor="description"
-                className="form-label fw-semibold mb-2"
+                className="mb-2 block text-sm font-semibold text-foreground"
               >
                 Description
               </label>
               <textarea
                 id="description"
-                className={`form-control ${errors.description ? "is-invalid" : ""}`}
+                className={`min-h-30 w-full rounded-lg border bg-background px-3 py-2 text-sm text-foreground shadow-sm transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40 ${errors.description ? "border-destructive/70 focus-visible:ring-destructive/40" : "border-input"}`}
                 placeholder="Write details..."
                 rows={5}
                 {...register("description")}
               />
               {errors.description ? (
-                <div className="invalid-feedback d-block mt-2">
+                <div className="mt-2 text-xs text-destructive">
                   {errors.description.message}
                 </div>
               ) : null}
-              <div className="form-text mt-2">Optional, but recommended.</div>
+              <div className="mt-2 text-xs text-muted-foreground">
+                Optional, but recommended.
+              </div>
             </div>
 
             <div>
-              <label htmlFor="column" className="form-label fw-semibold">
+              <label
+                htmlFor="column"
+                className="mb-2 block text-sm font-semibold text-foreground"
+              >
                 Column
               </label>
               <select
                 id="column"
-                className={`form-select ${errors.column ? "is-invalid" : ""}`}
+                className={`h-10 w-full rounded-lg border bg-background px-3 text-sm text-foreground shadow-sm transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40 ${errors.column ? "border-destructive/70 focus-visible:ring-destructive/40" : "border-input"}`}
                 {...register("column")}
               >
                 <option value="backlog">Backlog</option>
@@ -113,11 +127,13 @@ const CreateTask = () => {
                 <option value="done">Done</option>
               </select>
               {errors.column ? (
-                <div className="invalid-feedback">{errors.column.message}</div>
+                <div className="mt-2 text-xs text-destructive">
+                  {errors.column.message}
+                </div>
               ) : null}
             </div>
 
-            <div style={{ width: "fit-content" }}>
+            <div className="w-fit">
               <SubmitButton isLoading={isPending}>Create Task</SubmitButton>
             </div>
           </form>

@@ -4,6 +4,8 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Button } from "./button";
 import { deleteTask } from "@/lib/delete-task-service/deleteTaskService";
 import { toast } from "sonner";
+import { Spinner } from "./spinner";
+import { Trash2 } from "lucide-react";
 
 type DeleteButtonProps = {
   taskId: string;
@@ -27,7 +29,7 @@ const DeleteButton = ({ taskId }: DeleteButtonProps) => {
       return resp;
     },
     onSuccess: () => {
-      toast.success(`Task ID ${taskId} was deleted...`);
+      toast.success(`Task ID ${taskId.slice(-5)} was deleted...`);
       queryClient.invalidateQueries({ queryKey: ["tasks"] });
       queryClient.invalidateQueries({ queryKey: ["delete"] });
       queryClient.invalidateQueries({ queryKey: [taskId] });
@@ -37,12 +39,12 @@ const DeleteButton = ({ taskId }: DeleteButtonProps) => {
   return (
     <Button
       variant="destructive"
-      size="sm"
+      size="icon-sm"
       type="button"
       onClick={() => mutate()}
       disabled={isPending}
     >
-      {isPending ? "Deleting..." : "Delete"}
+      {isPending ? <Spinner className="animate-spin" /> : <Trash2 />}
     </Button>
   );
 };

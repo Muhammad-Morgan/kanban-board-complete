@@ -3,6 +3,7 @@ import { Task } from "@/models/Task/task";
 import { taskSchema } from "@/lib/zodSchemas";
 import dbConnect from "../dbConnect";
 import { StatusCodes } from "http-status-codes";
+import { auth } from "@/auth";
 
 type CreateTasksProp = {
   title: string;
@@ -14,6 +15,15 @@ export async function createTask({
   description,
   column,
 }: CreateTasksProp) {
+  const session = await auth();
+
+  if (!session?.user?.id) {
+    return {
+      message: "Unauthorized action",
+      statusCode: StatusCodes.UNAUTHORIZED,
+    };
+  }
+  const userId = session?.user?.id;
   if (!title || !description || !column)
     return {
       message: "Please fill all the fields...",
@@ -27,7 +37,7 @@ export async function createTask({
     };
   // create the object in DB
   await dbConnect();
-  await Task.create(validateFields.data);
+  await Task.create({ ...validateFields.data, createdBy: userId });
   return {
     success: true,
     statusCode: StatusCodes.CREATED,

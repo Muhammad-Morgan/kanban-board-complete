@@ -4,9 +4,7 @@ import Navbar from "@/components/organisms/Navbar";
 export default function TasksLayout({
   children,
 }: {
-  children: Readonly<{
-    children: React.ReactNode;
-  }>;
+  children: React.ReactNode;
 }) {
   return (
     <>
