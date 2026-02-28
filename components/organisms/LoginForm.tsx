@@ -9,8 +9,29 @@ import { CustomFormField } from "@/components/molecule/FormComponents";
 import { Button } from "../atom/button";
 import { Spinner } from "@/components/atom/spinner";
 import { loginSchema, LoginSchemaType } from "@/lib/zodSchemas";
-import { signIn } from "next-auth/react";
+import { signIn, type SignInResponse } from "next-auth/react";
 import { useState } from "react";
+
+const getSignInErrorMessage = (res?: SignInResponse) => {
+  if (!res) return "Sign in failed. Please try again.";
+
+  const code = res.code ?? "";
+  const error = res.error ?? "";
+
+  const messageByCode: Record<string, string> = {
+    "missing-credentials": "Please enter your email and password.",
+    "invalid-credentials": "Invalid email or password.",
+    credentials: "Sign in failed. Check your credentials.",
+    MissingCSRF: "Session expired. Please refresh and try again.",
+    AccessDenied: "Access denied. Please contact support.",
+  };
+
+  if (code && messageByCode[code]) return messageByCode[code];
+  if (error && messageByCode[error]) return messageByCode[error];
+  if (error === "CredentialsSignin") return "Invalid email or password.";
+
+  return "Sign in failed. Please try again.";
+};
 
 const LoginForm = () => {
   const router = useRouter();
@@ -31,7 +52,7 @@ const LoginForm = () => {
         password: values.password,
       });
       if (res?.error) {
-        toast.error(res.error);
+        toast.error(getSignInErrorMessage(res));
         return;
       }
       toast.success("Welcome back!");

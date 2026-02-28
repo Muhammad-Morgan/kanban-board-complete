@@ -7,7 +7,7 @@ import { ModeToggle } from "@/components/molecule/ThemeToggle";
 export default function Home() {
   return (
     <main className="relative overflow-hidden bg-background text-foreground">
-      <div className="pointer-events-none absolute -top-24 left-1/2 h-72 w-[520px] -translate-x-1/2 rounded-full bg-linear-to-r from-primary/20 via-primary/10 to-transparent blur-3xl" />
+      <div className="pointer-events-none absolute -top-24 left-1/2 h-72 w-130 -translate-x-1/2 rounded-full bg-linear-to-r from-primary/20 via-primary/10 to-transparent blur-3xl" />
       <div className="pointer-events-none absolute right-0 top-1/2 h-72 w-72 -translate-y-1/2 rounded-full bg-linear-to-br from-secondary/20 via-accent/15 to-transparent blur-3xl" />
       <nav className="border-b border-border/70 bg-muted backdrop-blur">
         <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-3">
